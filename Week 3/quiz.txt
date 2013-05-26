@@ -1,0 +1,143 @@
+## Week 3 Quiz
+
+##################################################################################################################################################################################################################
+
+## 1) What does ORM stand for?
+
+=>  Object Relational Mapper
+
+##################################################################################################################################################################################################################
+
+## 2) What are the four functions of persistent storage? (hint: CRUD)
+
+=>  C - create
+    R - read
+    U - update
+    D - delete
+
+##################################################################################################################################################################################################################
+
+## 3) The result is 'princess bride' what was the query? You can use Ruby (ActiveRecord) or SQL
+
+    class User < ActiveRecord::Base
+
+    end
+
+        ------------------------------------
+        | Users Table                      |
+        +----+---------+-------------------+
+        | ID | Name    | Movie             |
+        |----+---------+-------------------|
+        | 1  | Richard | zoolander         |
+        |----+---------+-------------------|
+        | 2  | Ruby    | princess bride    |
+        |----+---------+-------------------|
+        | 3  | Chris   | sandlot           |
+        +----+---------+-------------------|
+
+=>  SELECT movie
+    FROM users
+    WHERE id = 3;
+
+    User.where(id: 3).first.movie
+
+##################################################################################################################################################################################################################
+
+## 4) What type of key does the ID column represent in the Users table above
+
+  A) Foreign
+
+  B) Primary
+
+  C) Public
+
+  D) Private
+
+  => B) Primary
+
+
+##################################################################################################################################################################################################################
+
+## 5) MIN is a database function, list one more
+
+=>  MAX
+
+##################################################################################################################################################################################################################
+
+## 6) In Rails we could build a blog. On each blog post we might want comments. We could say that a Post has_many :comments and that a Comment belongs to :post.
+
+    class Post < ActiveRecord::Base
+      has_many :comments
+    end
+
+    class Comment < ActiveRecord::Base
+      belongs_to :post
+    end
+
+A post has properties :title, :author_name, and :body, a comment has properties :name & :body. Sketch out a posts table and a comments table including the primary and foreign keys. Use this data:
+
+
+    1) "John" wrote a post titled "I love dogs" with the content "woof", "richard" commented "that was great", susan commented "cats are better"
+
+    2) "Sara" wrote a post titled "cars are great" with the content " I think they are", "james" commented  "they are"
+
+
+Sketch this out so it looks like the users table above
+
+
+        ---------------------------------------------------------
+        | POSTS Table                                           |
+        +----+----------------+-------------------+-------------+
+        | ID | Title          | Author Name | Body              |
+        |----+----------------+-------------------+-------------|
+        | 1  | I love dogs    | John        | woof              |
+        |----+----------------+-------------------+-------------|
+        | 2  | cars are great | Sara        |  I think they are |
+        +----+----------------+-------------------+-------------|
+
+        ---------------------------------------------------------
+        | COMMENTS Table                                        |
+        +----+----------------+-------------------+-------------+
+        | ID | POST ID        | Author Name | Body              |
+        |----+----------------+-------------------+-------------|
+        | 1  | 1              | richard     | that was great    |
+        |----+----------------+-------------------+-------------|
+        | 2  | 1              | susan       | cats are better   |
+        |----+----------------+-------------------+-------------|
+        | 3  | 2              | james       | they are          |
+        +----+----------------+-------------------+-------------|
+
+##################################################################################################################################################################################################################
+
+## 7) Using only Ruby (ActiveRecord) and using the data from the above example, how would we find all the posts that were written by "john".
+
+=>  Post.where(author_name: 'john').all
+
+##################################################################################################################################################################################################################
+
+## 8) What is the output of the following
+
+
+    puts "hello".class
+    # => String
+
+    puts {:bird => 'tweet'}.class
+    # => Hash
+
+    class Adult
+    end
+
+    class Child < Adult
+    end
+
+    little_richie = Child.new
+
+    puts little_richie.class
+    # => Child
+
+
+
+
+Hints:
+
+select, where, count, from, *, =
